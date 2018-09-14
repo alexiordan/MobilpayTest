@@ -4,10 +4,10 @@ Test de utilizare a bibliotecii pentru plati MobilPay
 Trebuie sa aveti instalat SDK pentru ASP.Net Core 2.1 de aici: https://www.microsoft.com/net/download/dotnet-core/2.1
 
 Pentru testare am gandit urmatorul scenariu:
-0. Activati exceptiile
-1. Porniti solutia
-2. Pentru criptare apelati: https://localhost:5001/api/payment/
-3. Pentru decriptare apelati POST la adresa: https://localhost:5001/api/payment/confirmation
+1. Activati exceptiile
+2. Porniti solutia
+3. Pentru criptare apelati: https://localhost:5001/api/payment/
+4. Pentru decriptare apelati POST la adresa: https://localhost:5001/api/payment/confirmation
 ```
 User-Agent: Fiddler
 Host: localhost:5001
