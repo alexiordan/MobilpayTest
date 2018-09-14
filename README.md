@@ -8,12 +8,12 @@ Pentru testare am gandit urmatorul scenariu:
 1. Porniti solutia
 2. Pentru criptare apelati: https://localhost:5001/api/payment/
 3. Pentru decriptare apelati POST la adresa: https://localhost:5001/api/payment/confirmation
-
+```
 User-Agent: Fiddler
 Host: localhost:5001
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 0
-
+```
 La decriptare am folosit textxml si env_key de la o tranzactie precedenta, dar le puteti inlocui si dumneavoastra.
 
 In urma apelurilor ar trebui sa apara exceptia: "System.NullReferenceException: 'Object reference not set to an instance of an object.'
