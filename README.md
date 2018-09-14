@@ -16,7 +16,7 @@ Content-Length: 0
 ```
 La decriptare am folosit textxml si env_key de la o tranzactie precedenta, dar le puteti inlocui si dumneavoastra.
 
-In urma apelurilor ar trebui sa apara exceptia: "System.NullReferenceException: 'Object reference not set to an instance of an object.'
-"
+In urma apelurilor ar trebui sa apara exceptia: `"System.NullReferenceException: 'Object reference not set to an instance of an object.'
+"`
 
-Pentru partea de criptare am gasit o solutie in metoda Helper.EncryptWithCng. Penru decriptare insa nu am gasit inca ceva.
+Pentru partea de criptare am gasit o solutie in metoda `Helper.EncryptWithCng`. Penru decriptare insa nu am gasit inca ceva.
