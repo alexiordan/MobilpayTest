@@ -3,3 +3,7 @@
 ################################################################################
 
 /.vs/Test/v15
+/Test/bin/Debug/netcoreapp2.1
+/.vs/MobilpayTest/v15
+/.vs
+/Test/obj

@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="MobilPayResources\MobilpayEncryptDecrypt.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MobilPayResources\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MobilpayEncryptDecrypt">
+      <HintPath>MobilPayResources\MobilpayEncryptDecrypt.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="MobilPayResources\sandbox.CQGA-T555-7N6S-BK4S-VQJD.public.cer">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="MobilPayResources\sandbox.CQGA-T555-7N6S-BK4S-VQJDprivate.key">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
