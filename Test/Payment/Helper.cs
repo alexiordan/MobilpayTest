@@ -1,5 +1,7 @@
 ﻿using JavaScience;
 using MobilpayEncryptDecrypt;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Security;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,6 +51,8 @@ namespace Test.Payment
             return path + separator1;
         }
 
+        static byte[] dataToBeEncrypted;
+
         /// <summary>
         /// Inlocuitor pentru Encrypt cu RSACryptoServiceProvider 
         /// </summary>
@@ -60,6 +64,7 @@ namespace Test.Payment
             try
             {
                 byte[] bytes = Encoding.ASCII.GetBytes(mobilpayEncrypt.Data);
+                dataToBeEncrypted = bytes;
                 Random random = new Random();
                 byte[] array = new byte[8];
                 for (int i = 0; i < array.Length; i++)
@@ -68,6 +73,7 @@ namespace Test.Payment
                 }
                 RC4(ref bytes, array);
                 X509Certificate2 x509Certificate = new X509Certificate2(mobilpayEncrypt.X509CertificateFilePath);
+                
                 var rSACng = x509Certificate.GetRSAPublicKey();//.PublicKey.Key as RSACng;
                 rSACng.ExportParameters(false);
                 byte[] inArray = rSACng.Encrypt(array, RSAEncryptionPadding.Pkcs1);
@@ -81,45 +87,7 @@ namespace Test.Payment
             return 0;
         }
 
-
-        /// <summary>
-        /// Asta e un loc de exersat
-        /// </summary>
-        /// <param name="dummy"></param>
-        /// <param name="mobilpayDecrypt"></param>
-        /// <returns></returns>
-        public static int DecryptWithCng(this MobilpayEncryptDecrypt.MobilpayEncryptDecrypt dummy, MobilpayDecrypt mobilpayDecrypt)
-        {
-            try
-            {
-                StreamReader streamReader = File.OpenText(mobilpayDecrypt.PrivateKeyFilePath);
-                string sPrivKey = streamReader.ReadToEnd().Trim();
-                streamReader.Close();
-
-                //RSACng ceva = new RSACng( CngKey.Import(streamReader.rea);
-                RSACryptoServiceProvider decodedPrivKeyInfo = opensslkey.GetDecodedPrivKeyInfo(sPrivKey);
-                string envelopeKey = mobilpayDecrypt.EnvelopeKey;
-                byte[] rgb = Convert.FromBase64String(envelopeKey);
-                byte[] bytes = Convert.FromBase64String(mobilpayDecrypt.Data);
-                try
-                {
-                    byte[] key = decodedPrivKeyInfo.Decrypt(rgb, false);
-                    RC4(ref bytes, key);
-                    mobilpayDecrypt.DecryptedData = Encoding.ASCII.GetString(bytes);
-                }
-                catch (CryptographicException ex)
-                {
-                    throw ex;
-                }
-            }
-            catch (Exception ex2)
-            {
-                throw ex2;
-            }
-            return 0;
-        }
-
-        // MobilpayEncryptDecrypt.MobilpayEncryptDecrypt
+              
         private static void RC4(ref byte[] bytes, byte[] key)
         {
             byte[] array = new byte[256];

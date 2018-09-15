@@ -107,9 +107,9 @@ namespace Test.Payment
             encrypt.Data = encdecr.GetXmlText(card);
             encrypt.X509CertificateFilePath = GetPathToCertificate();
             m_Logger.LogInformation($"X509CertificateFilePath= [{encrypt.X509CertificateFilePath}]");
-            encdecr.Encrypt(encrypt);
+            //encdecr.Encrypt(encrypt);
             //Apelul urmator nu arunca exceptie
-            //encdecr.EncryptWithCng(encrypt);
+            encdecr.EncryptWithCng(encrypt);
            
 
             return encrypt;
@@ -147,6 +147,7 @@ namespace Test.Payment
             decrypt.Data = textxml;
             decrypt.EnvelopeKey =  env_key;
             decrypt.PrivateKeyFilePath = keypath;
+            //encdecrypt.Decrypt(decrypt);
             encdecrypt.Decrypt(decrypt);
             Mobilpay_Payment_Request_Card card = new Mobilpay_Payment_Request_Card();
             card = encdecrypt.GetCard(decrypt.DecryptedData);
